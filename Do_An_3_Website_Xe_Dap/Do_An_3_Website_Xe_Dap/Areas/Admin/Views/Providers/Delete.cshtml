@@ -1,0 +1,87 @@
+﻿@model DataShop.EF.Provider
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Xoá nhà cung cấp @Model.PrvName
+}
+
+<input id="id" hidden value="@Model.PrvID" type="text" class="form-control" placeholder="id" aria-label="Username" aria-describedby="basic-addon1">
+<h3>Are you sure you want to delete this?</h3>
+<div ng-controller="Provider">
+    <h4>Provider</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PrvName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrvName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input ng-click="Delete()" type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+
+<script src="~/Content/angular.min.js"></script>
+
+<script>
+    var app = angular.module('XeDap', []);
+
+    app.controller('Provider', function ($scope, $http, $window) {
+        $scope.provider = {}
+        $scope.Delete = Delete;
+        function Delete() {
+            var config = {
+                params: {
+                    id: $("#id").val(),
+                }
+            }
+            $http.post("/Admin/Providers/deleteobj", config ).then(function (result) {
+                $window.location.href = '../Providers/Index';
+            }, function (error) {
+                console.log(config)
+                alert("Thất bại")
+            });
+        }
+
+    });
+</script>
+

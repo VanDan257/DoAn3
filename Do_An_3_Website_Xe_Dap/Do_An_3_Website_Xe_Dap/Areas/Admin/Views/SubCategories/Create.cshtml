@@ -1,0 +1,87 @@
+﻿@model DataShop.EF.SubCategory
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Tạo danh mục con mới
+}
+
+<div class="container-fluid" ng-controller="subcategory">
+    <form ng-submit="themmoi(subcate)">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CateID, "CateID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select ng-model="subcate.CateID">
+                        <option ng-repeat="x in tendm" value="{{x.CateName}}">
+                            {{x.CateName}}
+                        </option>
+                    </select>
+                    @*@Html.DropDownList("CateID", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.ValidationMessageFor(model => model.CateID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubCateName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input ng-model="subcate.SubCateName" class="form-control" />
+                    @*@Html.EditorFor(model => model.SubCateName, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.SubCateName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        var myApp = angular.module("XeDap", []);
+        myApp.controller("subcategory", mycontrol);
+        function mycontrol($scope, $http, $httpParamSerializerJQLike) {
+            $scope.Subcategory = { SubCateID: 0, CateID: 0, SubCateName: ""};
+
+            $http.get("/Admin/Products/GetTenDM").then(function (result) {
+                $scope.tendm = result.data;
+                Console.log($scope.tendm)
+            }, function (error) {
+                alert("Loi lay ten danh muc")
+            });
+
+            $scope.antiForgeryToken = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+
+            $scope.themmoi = function (formData) {
+                var data = new FormData();
+                SubCateID = $scope.Subcategory.SubCateID;
+                CateID = $scope.Subcategory.CateID;
+                SubCateName = $scope.Subcategory.SubCateName;
+                var dataRequest = {
+                    __RequestVerificationToken: $scope.antiForgeryToken,
+                    formData: $scope.Subcategory
+                };
+
+                $http.post("/Admin/Subcategory/Create", $httpParamSerializerJQLike(dataRequest), { headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } }).then(function (response) {
+                    $scope.result = JSON.parse(response.data);
+                });
+            }
+        }
+    </script>
+}

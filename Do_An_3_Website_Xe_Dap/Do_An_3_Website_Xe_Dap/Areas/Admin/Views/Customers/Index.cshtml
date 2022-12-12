@@ -1,0 +1,122 @@
+﻿@model IEnumerable<DataShop.EF.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh sách Khách hàng
+}
+
+<button class="btn btn-primary" style="margin-bottom: 12px;">
+    <i class="fa-solid fa-plus"></i>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "text-gray-100" })
+</button>
+
+<div class="container-fluid" ng-controller="mycontrol">
+
+    <table class="table table-bordered table-striped" id="dataTable">
+        <thead>
+            <tr>
+                <th>TT</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CusName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr ng-repeat="data in datas">
+                    <td>{{$index+1}}</td>
+                    <td>
+                        {{data.CusName}}
+                        @*@Html.DisplayFor(modelItem => item.CusName)*@
+                    </td>
+                    <td>
+                        {{data.Phone}}
+                        @*@Html.DisplayFor(modelItem => item.Phone)*@
+                    </td>
+                    <td>
+                        {{data.Email}}
+                        @*@Html.DisplayFor(modelItem => item.Email)*@
+                    </td>
+                    <td>
+                        {{data.Address}}
+                        @*@Html.DisplayFor(modelItem => item.Address)*@
+                    </td>
+                    <td>
+                        {{data.UserName}}
+                        @*@Html.DisplayFor(modelItem => item.UserName)*@
+                    </td>
+                    <td>
+                        {{data.Password}}
+                        @*@Html.DisplayFor(modelItem => item.Password)*@
+                    </td>
+                    <td>
+                        {{data.Image}}
+                        @*@Html.DisplayFor(modelItem => item.Image)*@
+                    </td>
+                    <td>
+                        <a href="/Admin/Customers/Edit?id={{data.CusID}}"><i class="text-warning fa-solid fa-pen-to-square"></i></a>
+                        <a href="/Admin/Customers/Details?id={{data.CusID}}"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="/Admin/Customers/Delete?id={{data.CusID}}"><i class="text-danger fa-solid fa-trash"></i></a>
+
+                        @*@Html.ActionLink(" ", "Edit", new { id = item.CusID }, new { @class = "text-warning fa-solid fa-pen-to-square" }) |
+        @Html.ActionLink(" ", "Details", new { id = item.CusID }, new { @class = " fa-solid fa-circle-info" }) |
+        @Html.ActionLink(" ", "Delete", new { id = item.CusID }, new { @class = "text-danger fa-solid fa-trash" })*@
+                    </td>
+                </tr>
+        </tbody>
+
+    </table>
+</div>
+
+@section scripts {
+    <script src="/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    @*<script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>*@
+    <script>
+
+        var myApp = angular.module("XeDap", []);
+        myApp.controller("mycontrol", mycontrol);
+        function mycontrol($scope, $http) {
+            //$http({
+            //    url: "/Admin/Customers/GetAll",
+            //    method: "GET"
+            //}).then(function (res) {
+            //    $scope.datas = res.data;
+            //    //console.log($scope.datas)
+            //});
+            $http({
+                url: "/Admin/Customers/GetAll",
+                method: "GET"
+            }).then(function (res) {
+                $scope.datas = res.data;
+                angular.element(document).ready(function () {
+                    console.log("okj")
+                    $('#dataTable').DataTable();
+                });
+
+            });
+        }
+    </script>
+}

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DataShop.EF.Sale_Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh sách sản phẩm giảm giá
+}
+
+<button class="btn btn-primary" style="margin-bottom: 12px;">
+    <i class="fa-solid fa-plus"></i>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "text-gray-100" })
+</button>
+
+<table class="table table-bordered table-striped" id="dataTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OldPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OldPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Sale_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Sale_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Sale_ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts {
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>
+    @*<script>
+            var myApp = angular.module("myApp", []);
+            myApp.controller("mycontrol", mycontrol);
+            function mycontrol($scope, $http) {
+                $http({
+                    url: "/Admin/Products/GetAll",
+                    method: "GET"
+                }).then(function (res) {
+                    $scope.datas = res.data;
+                });
+            }
+        </script>*@
+}

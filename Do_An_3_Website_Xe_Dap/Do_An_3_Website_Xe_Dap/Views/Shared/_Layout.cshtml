@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Cửa hàng xe đạp trực tuyến</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link href="/Content/bootstrap-5.2.0-dist/css/bootstrap.css?v=3.4.1" rel="stylesheet" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/base.css?v=3.4.1")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/responsive.css")" />
+    @Scripts.Render("~/bundles/modernizr")
+    @*<link href="/Content/bootstrap-theme.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="@Url.Content("~/fonts/fontawesome-free-6.1.1-web/css/all.min.css")">
+    @RenderSection("css", required: false)
+</head>
+<body>
+    @if (TempData["ToastMessage"] != null)
+    {
+        <div id="toast" class="alert @TempData["AlertType"] hide">
+            @TempData["ToastMessage"]
+        </div>
+    }
+    <div id="big-header">
+        <div id="header-top">
+            <div class="container grid">
+                <div class="nav-top">
+                    <a class="nav-top-item" href="">Chào mừng bạn đến với Cửa hàng xe đạp</a>
+                    <span class="border-separate"></span>
+                    <a class="nav-top-item" href="tel:0343628648">Liên hệ: 0343628648 - 0983123456</a>
+                    <span class="border-separate"></span>
+                    <div class="social">
+                        <a href="https://www.facebook.com/profile.php?id=100045393554281" target="_blank"><i class="fa-brands fa-facebook-f color-white"></i></a>
+                        <a href=""><i class="fa-brands fa-twitter color-white"></i></a>
+                        <a href=""><i class="fa-brands fa-pinterest color-white"></i></a>
+                        <a href="mailto:vandan250702@gmail.com" target="_blank"><i class="fa-brands fa-google-plus-g color-white"></i></a>
+                    </div>
+                </div>
+                <div class="user-top">
+                    @{ Html.RenderAction("HeaderUser", "Home");}
+                    <div class="support-link">
+                        <a class="user-item" href="DichVuBanHang">Dịch vụ</a>
+                        <span class="border-separate"></span>
+                        <a href="#" class="user-item">Hỗ trợ</a>
+                        <span class="border-separate"></span>
+                    </div>
+                    <div class="top-cart">
+                        <a href="../Home/viewCart">
+                            <i class="fa-solid fa-cart-shopping color-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-header">
+            <div class="main-header--container grid">
+                <div class="img-header">
+                    <a href="TrangChu">
+                        <img src="@Url.Content("~/imgs/logo1.png")" alt="">
+                    </a>
+                </div>
+                <div class="header__search">
+                    <div class="search__all">
+                        <span class="search__all-text">Tất cả</span>
+                        <i class="search__all-icon-down fa-solid fa-angle-down"></i></a>
+                    </div>
+                    <div class="search__input">
+                        <input type="text" class="input-search" placeholder="Nhập từ khoá cần tìm ...">
+                    </div>
+                    <div class="search-icon" onclick="search()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="user-main-menu user-top">
+                    <div class="drop-down drop-down-main-menu">
+                        <span class="user-item">Tài khoản</span>
+                        <i class="fa-solid fa-angle-down down-user color-white"></i>
+                        <!-- <ul class="user-link">
+                            <li class="user-link-login"><a href="">Đăng nhập</a></li>
+                            <li class="user-link-login"><a href="">Đăng ký</a></li>
+                        </ul> -->
+                        <span class="border-separate"></span>
+                    </div>
+                    <div class="support-link">
+                        <a href="DichVuBanHang" class="user-item">Dịch vụ</a>
+                        <span class="border-separate"></span>
+                        <a href="#" class="user-item">Hỗ trợ</a>
+                        <span class="border-separate"></span>
+                    </div>
+                    <div class="top-cart">
+                        <a href="viewCart">
+                            <i class="fa-solid fa-cart-shopping color-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="respon-menu">
+                <label for="nav-respon" class="nav__bar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+                <input type="checkbox" class="nav-respon-input" id="nav-respon">
+
+                <label for="nav-respon" class="over-lay"></label>
+
+                <div class="nav_mobile">
+                    <label for="nav-respon" class="nav-mobile-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </label>
+                    @{ Html.RenderAction("MenuCategory", "Home");}
+                    @*@Html.Partial("_Menu")*@
+                </div>
+            </div>
+        </div>
+        <div class="header-service grid__full-width">
+            <div class="hs-container grid">
+                <div class="service ">
+                    <a href="" class="service-link">
+                        <img src="@Url.Content("~/imgs/h1.png")" alt="">
+                        <h4 class="text-sevice">GIAO HÀNG TOÀN QUỐC</h4>
+                    </a>
+                </div>
+                <div class="service ">
+                    <a href="" class="service-link">
+                        <img src="@Url.Content("~/imgs/h2.png")" alt="">
+                        <h4 class="text-sevice">BÀN HÀNG 8G ĐẾN 19G</h4>
+                    </a>
+                </div>
+                <div class="service ">
+                    <a href="" class="service-link">
+                        <img src="@Url.Content("~/imgs/h3.png")" alt="">
+                        <h4 class="text-sevice">ĐẢM BẢO CHẤT LƯỢNG</h4>
+                    </a>
+                </div>
+                <div class="service ">
+                    <a href="About" class="service-link">
+                        <img src="@Url.Content("~/imgs/h4.png")" alt="">
+                        <h4 class="text-sevice">THANH TOÁN KHI NHẬN HÀNG</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_navbar")
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <div id="contact">
+        <div class="container-contacts grid">
+            <div class="list-contact">
+                <h4 class="title-contact">CÔNG TY TNHH TM XE ĐẠP VĂN DÂN</h4>
+                <table class="info-company">
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td>Đội 2 - Đình Dù - Văn Lâm - Hưng Yên</td>
+                    </tr>
+                    <tr>
+                        <td>Điện thoại</td>
+                        <td>0343628648</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>vandan250702@gmail.com</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="list-contact">
+                <h4 class="title-contact">THÔNG TIN</h4>
+                <ul class="list-info">
+                    <li class="item-info">BẢO MẬT THÔNG TIN</li>
+                    <li class="item-info">QUY ĐỊNH CHUNG</li>
+                </ul>
+            </div>
+            <div class="list-contact">
+                <h4 class="title-contact">GIỚI THIỆU</h4>
+                <ul class="list-info">
+                    <li class="item-info">GIỚI THIỆU</li>
+                    <li class="item-info">LIÊN HỆ</li>
+                </ul>
+            </div>
+            <div class="list-contact">
+                <h4 class="title-contact">DỊCH VỤ</h4>
+                <ul class="list-info">
+                    <li class="item-info">DV BÁN HÀNG</li>
+                    <li class="item-info">DV GIAO HÀNG</li>
+                </ul>
+            </div>
+            <div class="list-contact">
+                <div class="title-contact">LIÊN KẾT VỚI CHÚNG TÔI</div>
+                <div class="list-social">
+                    <i class="fa-brands fa-facebook-square"></i>
+                    <i class="fa-brands fa-pinterest-square"></i>
+                    <i class="fa-brands fa-twitter-square"></i>
+                    <i class="fa-brands fa-google-plus-square"></i>
+                </div>
+                <img src="@Url.Content("~/imgs/contact1.png")" alt="" class="img-contact">
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="content-footer">
+            Copyright © 2022 Xe đạp Trực Tuyến
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/jquery-3.6.1.min.js")"></script>
+    <script src="~/Assets/Admin/js/sb-admin-2.js"></script>
+    <script src="/Content/bootstrap-5.2.0-dist/js/bootstrap.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js">
+    </script>
+
+    <script>
+        // Toast Message
+        $('#toast').removeClass('hide');
+        $('#toast').delay(3000).slideUp(500)
+    </script>
+
+    @RenderSection("script", required: false)
+
+</body>
+</html>

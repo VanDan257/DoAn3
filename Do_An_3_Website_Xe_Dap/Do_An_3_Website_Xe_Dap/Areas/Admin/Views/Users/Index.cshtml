@@ -1,0 +1,90 @@
+﻿@model IEnumerable<DataShop.EF.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+
+@section header{
+    Danh sách user
+}
+
+<button class="btn btn-primary" style="margin-bottom: 12px;">
+    <i class="fa-solid fa-plus"></i>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "text-gray-100" })
+</button>
+<table class="table table-bordered table-striped" id="dataTable">
+    <thead>
+        <tr>
+            <th>TT</th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(i++)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @if (item.Role == false)
+                    {
+                        <span>Nhân viên</span>
+                    }
+                    else
+                    {
+                        <span>Quản lý</span>
+                    }
+                    @*@Html.DisplayFor(modelItem => item.Role)*@
+                </td>
+                <td>
+                    @if (item.Active == false)
+                    {
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    }
+                    else
+                    {
+                        <i class="text-info fa-solid fa-circle-check"></i>
+                    }
+                    @*@Html.DisplayFor(modelItem => item.Active)*@
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.UserID }, new { @class = "text-warning fa-solid fa-pen-to-square" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.UserID }, new { @class = " fa-solid fa-circle-info" }) |
+                    @Html.ActionLink(" ", "Delete", new { id = item.UserID }, new { @class = "text-danger fa-solid fa-trash" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts {
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>
+}

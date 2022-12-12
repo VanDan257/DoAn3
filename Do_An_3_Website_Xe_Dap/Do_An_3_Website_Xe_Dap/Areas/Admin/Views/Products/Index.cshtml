@@ -1,0 +1,109 @@
+﻿@model IEnumerable<DataShop.EF.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int tt = 1;
+}
+
+@section header{
+    Danh sách sản phẩm
+}
+
+<button class="btn btn-primary" style="margin-bottom: 12px;">
+    <i class="fa-solid fa-plus"></i>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "text-gray-100" })
+</button>
+<div class="container-fluid" ng-controller="mycontrol">
+
+    <table class="table table-bordered table-striped" id="dataTable">
+        <thead>
+            <tr>
+                <th>TT</th>
+                <th>
+                    Hình ảnh
+                </th>
+                <th>
+                    Tiêu đề
+                </th>
+                <th>
+                    Danh mục
+                </th>
+                <th>
+                    Màu sắc
+                </th>
+                <th>
+                    Giá
+                </th>
+                <th>
+                    Giá khuyến mãi
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr ng-repeat="data in datas">
+                    <td>{{$index+1}}</td>
+                    <td>
+                        <img src="{{data.Image}}" style="width: 150px;" />
+                    </td>
+                    <td>
+                        {{data.Category.CateName}}
+                    </td>
+                    <td>
+                        {{data.Title}}
+                    </td>
+                    <td>
+                        {{data.Color}}
+                    </td>
+                    <td>
+                        {{data.Price | currency: ""}}đ
+                    </td>
+                    <td>
+                        {{data.PromotionPrice}}
+                    </td>
+                    <td>
+                        {{data.Quantity}}
+                    </td>
+                    <td>
+                        <a href="/Admin/Products/Edit?id={{data.ProID}}"><i class="text-warning fa-solid fa-pen-to-square"></i></a>
+                        <a href="/Admin/Products/Details?id={{data.ProID}}"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="/Admin/Products/Delete?id={{data.ProID}}"><i class="text-danger fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+        </tbody>
+
+    </table>
+</div>
+
+@section scripts {
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    @*<script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>*@
+    <script>
+        var myApp = angular.module("XeDap", []);
+        myApp.controller("mycontrol", mycontrol);
+        function mycontrol($scope, $http) {
+            //$http({
+            //    url: "/Admin/Products/GetAll",
+            //    method: "GET"
+            //}).then(function (res) {
+            //    $scope.datas = res.data;
+            //});
+            $http({
+                url: "/Admin/Products/GetAll",
+                method: "GET"
+            }).then(function (res) {
+                $scope.datas = res.data;
+                angular.element(document).ready(function () {
+                    console.log("okj")
+                    $('#dataTable').DataTable();
+                });
+
+            });
+        }
+    </script>
+}

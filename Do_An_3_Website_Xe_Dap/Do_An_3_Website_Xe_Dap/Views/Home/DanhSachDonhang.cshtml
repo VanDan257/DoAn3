@@ -1,0 +1,44 @@
+﻿@model DataShop.EF.Order
+
+@{ 
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+@if (Model != null)
+{
+    <h3 class="title">DANH SÁCH ĐƠN HÀNG</h3>
+    <div class="box-container-cart">
+        <div class="container-table">
+            <table class="table-cart">
+                <thead class="head-table">
+                    <tr>
+                        <th colspan="2">SẢN PHẨM</th>
+                        <th>TRẠNG THÁI</th>
+                        <th>GIÁ</th>
+                        <th>SỐ LƯỢNG</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody class="list-cart" id="listCart">
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td class="box-img"><img src="@item.Product.Image"></td>
+                            <td class="name-bike">
+                                <p>@item.Product.Title</p>
+                            </td>
+                            <td>@Model.Status</td>
+                            <td>@String.Format(format, "{0:c0}", @item.Price)</td>
+                            <td class="quantity">
+                                <button id="btnGiam-@item.Product.ProID">-</button>
+                                <input type="text" class="txtQuantity" id="sl-@item.Product.ProID" data-id="@item.Product.ProID" value="@item.Quantity">
+                                <button id="btnTang-@item.Product.ProID">+</button>
+                            </td>
+                            <td class="end-pay"> @String.Format(format, "{0:c0}", item.Price * @item.Quantity)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

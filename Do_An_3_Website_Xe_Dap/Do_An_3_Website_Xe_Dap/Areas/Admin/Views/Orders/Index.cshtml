@@ -1,0 +1,134 @@
+﻿@model IEnumerable<DataShop.EF.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int tt = 1;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+@section header{
+    Danh sách đơn hàng
+}
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table table-bordered table-striped" id="dataTable" ng-controller="Order">
+    <thead>
+
+        <tr>
+            <th>TT</th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.OrderDate)*@
+                Ngày xác nhận
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryAddress)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Status)*@
+                Trạng thái
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Recipient)*@
+                Tên người nhận
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Customer.CusName)*@
+                Tên khách hàng
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.TotalPay)*@
+                Tổng tiền
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model)
+        {*@
+            <tr ng-repeat="data in datas">
+                <td>{{$index+1}}</td>
+                <td>
+                    {{data.OrderDate}}
+                    @*@Html.DisplayFor(modelItem => item.OrderDate)*@
+                </td>
+                <td>
+                    {{data.DeliveryAddress}}
+                    @*@Html.DisplayFor(modelItem => item.DeliveryAddress)*@
+                </td>
+                <td>
+                    {{data.Status}}
+                    @*@Html.DisplayFor(modelItem => item.Status)*@
+                </td>
+                <td>
+                    {{data.Note}}
+                    @*@Html.DisplayFor(modelItem => item.Note)*@
+                </td>
+                <td>
+                    {{data.Phone}}
+                    @*@Html.DisplayFor(modelItem => item.Phone)*@
+                </td>
+                <td>
+                    {{data.Recipient}}
+                    @*@Html.DisplayFor(modelItem => item.Recipient)*@
+                </td>
+                <td>
+                    {{data.Customer.CusName}}
+                    @*@Html.DisplayFor(modelItem => item.Customer.CusName)*@
+                </td>
+                <td>
+                    {{data.TotalPay}}
+                    @*@Html.DisplayFor(modelItem => item.TotalPay)*@
+                </td>
+                <td>
+                    @*<a href="/Admin/Orders/Edit?id=@item.OrdID"><i class="text-warning fa-solid fa-pen-to-square"></i></a>
+                    <a href="/Admin/Orders/Details?id=@item.OrdID"><i class="fa-solid fa-circle-info"></i></a>
+                    <a href="/Admin/Orders/Delete?id=@item.OrdID"><i class="text-danger fa-solid fa-trash"></i></a>*@
+                    <a href="/Admin/Orders/Edit?id={{data.OrdID}}"><i class="text-warning fa-solid fa-pen-to-square"></i></a>
+                    <a href="/Admin/Orders/Details?id={{data.OrdID}}"><i class="fa-solid fa-circle-info"></i></a>
+                    <a href="/Admin/Orders/Delete?id={{data.OrdID}}"><i class="text-danger fa-solid fa-trash"></i></a>
+
+                </td>
+            </tr>
+        @*}*@
+    </tbody>
+
+</table>
+
+@section scripts{
+    <script src="/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    @*<script src="/Assets/Admin/js/demo/datatables-demo.js"></script>*@
+    <script>
+        var myApp = angular.module("XeDap", []);
+        myApp.controller("Order", mycontrol);
+        function mycontrol($scope, $http) {
+            //$http({
+            //    url: "/Admin/Products/GetAll",
+            //    method: "GET"
+            //}).then(function (res) {
+            //    $scope.datas = res.data;
+            //});
+            $http({
+                url: "/Admin/Orders/GetAll",
+                method: "GET"
+            }).then(function (res) {
+                $scope.datas = res.data;
+                angular.element(document).ready(function () {
+                    console.log("okj")
+                    $('#dataTable').DataTable();
+                });
+
+            });
+        }
+    </script>
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c0ba464dfb243fbb70e32a169067aba" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.Category" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.Comment" Width="1.5" PointX="2" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.Customer" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.ImportBill" Width="1.5" PointX="8.125" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.ImportBillDetail" Width="1.5" PointX="9.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.News" Width="1.5" PointX="1.125" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.Order" Width="1.5" PointX="5.125" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.Product" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.Provider" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.SubCategory" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.User" Width="1.5" PointX="3.875" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_SubCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_Comment_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_Comment_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_OrdIDOrder_CusIDCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_ImportBill_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_ImportBill_User" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_ImportBillDetail_ImportBill" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_ImportBillDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_News_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.OrderDetail" Width="1.5" PointX="7.875" PointY="7.125" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_OrderDetail_Order" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_OrderDetail_Product" />
+        <EntityTypeShape EntityType="WebsiteXeDapMVCModel.Sale_Product" Width="1.5" PointX="0.75" PointY="5.125" />
+        <AssociationConnector Association="WebsiteXeDapMVCModel.FK_Sale_Product_Product" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

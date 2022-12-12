@@ -1,0 +1,50 @@
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\DataShop.dll.config
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\DataShop.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\DataShop.pdb
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.SqlServer.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Helpers.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Mvc.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Razor.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Deployment.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Razor.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.SqlServer.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Helpers.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Mvc.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Razor.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Deployment.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Razor.xml
+E:\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.csproj.AssemblyReference.cache
+E:\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.csproj.CoreCompileInputs.cache
+E:\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.csproj.CopyComplete
+E:\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.dll
+E:\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.pdb
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\DataShop.dll.config
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\DataShop.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\DataShop.pdb
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.SqlServer.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Helpers.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Mvc.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Razor.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Deployment.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Razor.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\EntityFramework.SqlServer.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Helpers.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Mvc.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.Razor.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Deployment.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\bin\Debug\System.Web.WebPages.Razor.xml
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.csproj.AssemblyReference.cache
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.csproj.CoreCompileInputs.cache
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.csproj.CopyComplete
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.dll
+E:\Đồ án 3\Do_An_3_Website_Xe_Dap\DataShop\obj\Debug\DataShop.pdb

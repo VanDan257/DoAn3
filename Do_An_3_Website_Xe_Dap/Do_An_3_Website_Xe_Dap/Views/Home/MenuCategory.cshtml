@@ -1,0 +1,23 @@
+﻿@model List<DataShop.EF.Category>
+@{
+    int img = 0;
+    string link = "/imgs/category";
+    string tail = ".png";
+}
+@foreach (var item in Model)
+{
+    img++;
+    <li class="menu-item-dad">
+        <a class="category-item-link" data-toggle="dropdown" href="../Home/DanhMucSanPham">
+            <img src="@(link+Convert.ToString(img)+tail)" class="category-item-icon" alt="">
+            <p class="category-item-text">@item.CateName</p>
+            <i class="drop-right fa-solid fa-angle-right"></i>
+        </a>
+        <ul class="menu-item-child">
+            @foreach (var dmc in item.SubCategories)
+            {
+                <li class="list-menu-item">@dmc.SubCateName</li>
+            }
+        </ul>
+    </li>
+}

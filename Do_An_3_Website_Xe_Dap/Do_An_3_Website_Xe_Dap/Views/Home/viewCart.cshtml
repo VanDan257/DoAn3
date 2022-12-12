@@ -1,0 +1,101 @@
+﻿@model List<DataShop.EF.OrderDetail>
+
+@{
+    ViewBag.Title = "viewCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+
+@section css{
+    <link rel="stylesheet" href="@Url.Content("/Content/GioHang.css?v=3.4.1")" />
+}
+
+@*@Html.Partial("_navbar")*@
+
+<div id="main" class="grid">
+    <h3 class="title">GIỎ HÀNG CỦA BẠN</h3>
+    @if (Session["CartSession"] != null)
+    {
+        <div class="box-container-cart">
+            <div class="container-table">
+                <table class="table-cart">
+                    <thead class="head-table">
+                        <tr>
+                            <th colspan="2">SẢN PHẨM</th>
+                            <th>GIÁ</th>
+                            <th>SỐ LƯỢNG</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody class="list-cart" id="listCart">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="box-img"><img src="@item.Product.Image"></td>
+                                <td class="name-bike">
+                                    <p>@item.Product.Title</p>
+                                    <small class="delete-product" data-id="@item.Product.ProID"><i class="fa-solid fa-trash-can"></i>Xoá sản phẩm</small>
+                                </td>
+                                <td>@String.Format(format, "{0:c0}", @item.Price)</td>
+                                <td class="quantity">
+                                    <button id="btnGiam-@item.Product.ProID">-</button>
+                                    <input type="text" class="txtQuantity" id="sl-@item.Product.ProID" data-id="@item.Product.ProID" value="@item.Quantity">
+                                    <button id="btnTang-@item.Product.ProID">+</button>
+                                </td>
+                                <td class="end-pay">@String.Format(format, "{0:c0}", item.Price * @item.Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div>
+                    <a href="../Home/DanhMucSanPham" class="text-dark btn btn-primary btn-left">Tiếp tục mua hàng</a>
+                </div>
+                <div class="service-cart">
+                    <button class="delete-cart" id="DeleteCart">Xoá giỏ hàng</button>
+                    <button class="update-cart" id="UpdateCart">Cập nhật giỏ hàng</button>
+                </div>
+            </div>
+            <div class="payment">
+                <h3 class="text-header-cart">THÔNG TIN ĐƠN HÀNG</h3>
+                <div class="box-pay">
+                    <div class="total-money">
+                        <p class="total">Tổng đơn hàng:</p>
+                        <p class="total-price" id="spTong"> @String.Format(format, "{0:c0}", Model.Sum(x => x.Price * x.Quantity))</p>
+                    </div>
+                    <a href="ThanhToan">
+                        <button class="act-pay">
+                            <b>THANH TOÁN</b>
+                            <br><small>KV ngoài Hưng Yên, SHOP sẽ liên hệ khách hàng khi báo giá</small>
+                        </button>
+                    </a>
+                </div>
+                <div class="policy-pay">
+                    <p><i class="fa-solid fa-check"></i>***LƯU Ý*** Giá vận chuyển tùy vào sản phẩm hoặc khu vực nhận hàng ngoài Hưng Yên, để biết chính xác Shop sẽ liên hệ "Dịch Vụ Vận Chuyển" và báo giá lại cho KH trước khi gửi hàng.</p>
+                    <p><i class="fa-solid fa-check"></i>Thời gian giao hàng từ 2 - 10 ngày làm việc (Không tính Thứ 7, CN và dịp LỄ, TẾT).</p>
+                    <p><i class="fa-solid fa-check"></i>Giao hàng toàn quốc COD hoặc CHUYỂN KHOẢN.</p>
+                    <p><i class="fa-solid fa-check"></i>Đổi trả hàng lỗi trong vòng 24 tiếng.</p>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="empty-cart">
+            <h2 class="text-empty-cart">Giỏ hàng của bạn đang trống. Mời bạn tiếp tục mua hàng!</h2>
+            <img src="/imgs/emptycart.jpg" alt="">
+            <a href="DanhMucSanPham" class="road-to-product">
+                <button>Tiếp tục mua hàng</button>
+            </a>
+        </div>
+    }
+
+    @{ Html.RenderAction("DanhSachDonHang", "Home");}
+
+</div>
+
+@section script{
+    @Scripts.Render("/Scripts/MenuOnTop.js")
+    <script src="/Assets/Client/Controller/cartController.js"></script>
+}
+

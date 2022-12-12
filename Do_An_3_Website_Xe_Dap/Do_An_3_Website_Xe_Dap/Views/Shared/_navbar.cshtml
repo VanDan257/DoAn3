@@ -1,0 +1,55 @@
+﻿<div class="navbar">
+    <div class="container-navbar grid">
+        <div class="navbar-vertical">
+            <input type="checkbox" id="displayCategory">
+            <label for="displayCategory">
+                <div class="category">
+                    <i class="category-icon fa-solid fa-bars"></i>
+                    <h4 class="category-text">DANH MỤC SẢN PHẨM</h4>
+                </div>
+            </label>
+            <ul class="category-list">
+                @{ Html.RenderAction("MenuCategory", "Home");}
+                <li>
+                    <a href="" class="category-item-link">
+                        <img src="/imgs/category6.png" class="category-item-icon" alt="">
+                        <p class="category-item-text">TUỲ CHỌN CẤU HÌNH</p>
+                        <i class="drop-right fa-solid fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="menu-header">
+            <ul class="list-menu">
+                <li class="menu-item-dad"><a href="../Home/TrangChu"> TRANG CHỦ </a></li>
+                <li class="menu-item-dad">
+                    <a href="../Home/DanhMucSanPham"> SẢN PHẨM</a>
+                </li>
+                <li class="menu-item-dad"><a href="#"> GIỚI THIỆU</a></li>
+                <li class="menu-item-dad"><a href="../Home/TinTuc"> TIN TỨC</a></li>
+                <li class="menu-item-dad"><a href="#"> LIÊN HỆ</a></li>
+                <li class="menu-item-dad"><a href="#"> FANPAGE</a></li>
+            </ul>
+            <div class="user-main-menu user-top">
+                <div class="drop-down drop-down-main-menu">
+                    @{ Html.RenderAction("HeaderUser", "Home");}
+                    <!-- <ul class="user-link">
+                        <li class="user-link-login"><a href="">Đăng nhập</a></li>
+                        <li class="user-link-login"><a href="">Đăng ký</a></li>
+                    </ul> -->
+                </div>
+                <div class="support-link">
+                    <a href="DichVuBanHang.html" class="user-item">Dịch vụ</a>
+                    <span class="border-separate"></span>
+                    <a href="#" class="user-item">Hỗ trợ</a>
+                    <span class="border-separate"></span>
+                </div>
+                <div class="top-cart">
+                    <a href="viewCart">
+                        <i class="fa-solid fa-cart-shopping color-white"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

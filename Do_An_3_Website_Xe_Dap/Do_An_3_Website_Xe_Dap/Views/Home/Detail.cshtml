@@ -1,0 +1,321 @@
+﻿@model DataShop.EF.Product
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link rel="stylesheet" href="/Content/base.css">
+    <link rel="stylesheet" href="/Content/Sản phẩm xe đạp.css?v=3.4.2">
+    <link rel="stylesheet" href="/Content/responsive.css">
+}
+
+
+<div id="main" class="grid">
+    <div class="container-bath">
+        <div class="bath">
+            <span class="bath1"><a href="TrangChu">Trang chủ</a></span>
+            <span class="gach-xuoc">/</span>
+            <span class="bath2"><a href="DanhMucSanPham">Danh mục</a></span>
+            <span class="gach-xuoc">/</span>
+            <span class="this-index">@Model.Title</span>
+        </div>
+    </div>
+    <div class="box-img-product">
+        <div class="container-img">
+            <div class="img-feature">
+                <img src="@Model.Image" alt="">
+            </div>
+            <div class="img-feature">
+                <img src="/FileUpLoad/images/img-extra1.png" alt="">
+            </div>
+            <div class="img-feature">
+                <img src="/FileUpLoad/images/img-extra2.png" alt="">
+            </div>
+            <div class="img-feature">
+                <img src="/FileUpLoad/images/img-extra3.png" alt="">
+            </div>
+            <div class="img-feature">
+                <img src="/FileUpLoad/images/img-extra4.png" alt="">
+            </div>
+            <div class="img-feature">
+                <img src="/FileUpLoad/images/img-extra5.png" alt="">
+            </div>
+            <div class="img-feature">
+                <img src="/FileUpLoad/images/img-extra6.png" alt="">
+            </div>
+            <div class="img-feature">
+                <img src="/FileUpLoad/images/img-extra7.png" alt="">
+            </div>
+            <div class="list-image">
+                <div class="control prev" onclick="turnLeft()">
+                    <i class="fa-solid fa-angle-left barturn"></i>
+                </div>
+                <div class="container-extra-img">
+                    <img src="/FileUpLoad/images/Xe đạp/3.png" onclick="currentSlide(1)" alt="" class="box-extra-img active-img">
+                </div>
+                <div class="container-extra-img">
+                    <img src="/FileUpLoad/images/img-extra1.png " onclick="currentSlide(2)" class="box-extra-img" alt=" ">
+                </div>
+                <div class="container-extra-img ">
+                    <img src="/FileUpLoad/images/img-extra2.png " onclick="currentSlide(3)" class="box-extra-img" alt=" ">
+                </div>
+                <div class="container-extra-img ">
+                    <img src="/FileUpLoad/images/img-extra3.png " onclick="currentSlide(4)" class="box-extra-img" alt=" ">
+                </div>
+                <div class="container-extra-img ">
+                    <img src="/FileUpLoad/images/img-extra4.png " onclick="currentSlide(5)" class="box-extra-img" alt=" ">
+                </div>
+                <div class="container-extra-img ">
+                    <img src="/FileUpLoad/images/img-extra5.png " onclick="currentSlide(6)" class="box-extra-img" alt=" ">
+                </div>
+                <div class="container-extra-img ">
+                    <img src="/FileUpLoad/images/img-extra6.png " onclick="currentSlide(7)" class="box-extra-img" alt=" ">
+                </div>
+                <div class="container-extra-img ">
+                    <img src="/FileUpLoad/images/img-extra7.png " onclick="currentSlide(8)" class="box-extra-img" alt=" ">
+                </div>
+                <div class="control next " onclick="turnRight() ">
+                    <i class="fa-solid fa-angle-right barturn "></i>
+                </div>
+            </div>
+        </div>
+        <div class="info-product ">
+            <h2 class="name-product ">@Model.Title</h2>
+            <div class="price" style="font-size: 1.2rem">@Model.Price đ</div>
+            <p class="tinh-trang">Tình trạng: <b>Có sẵn</b></p>
+            <p class="policy">
+                Cam kết từ XeđạptrựctuyếnLà đại lý xe đạp chính hãng.Xe mới 100% nguyên thùng, chỉ lắp ráp hoàn chỉnh khi có khách đặt hàng.Bán đúng giá quy định, phiếu bảo hành chính hãng, giá đã bao gồm 10% thuế VAT.Hoàn tiền 100% nếu sản phẩm bán ra
+                là hàng "nhái".Hàng mới 100%, nguồn gốc rõ ràng, đầy đủ phụ ...
+            </p>
+            @if (Model.Color != null)
+            {
+                <h4 class="color-product">Màu sắc:</h4>
+                <div class="list-color-product">
+                    <div class="item-color-product active-color" onclick="changActiveColor(this), currentSlide(1)" id="white">@Model.Color</div>
+                    <div class="item-color-product" onclick="changActiveColor(this), currentSlide(7)" id="yellow">Vàng</div>
+                    <div class="item-color-product" onclick="changActiveColor(this), currentSlide(4)" id="blue">Xanh</div>
+                </div>
+            }
+
+            <div class="quantity">
+                <b>Số lượng: </b>
+                <input type="number" min="1" value="1" class="quantity-number">
+            </div>
+            <a href="../Home/themgh?id=@Model.ProID" class="btn add-cart" onclick="addCart()">
+                <i class="fa-solid fa-cart-plus"></i>
+                <p class="text-cart">Thêm vào giỏ</p>
+            </a>
+        </div>
+    </div>
+    <div class="detail-product">
+        <div class="header-detail">
+            <ul class="list-detail">
+                <li class="information-product active-details" onclick="changActiveDetails('content-information',this)">CHI TIẾT SẢN PHẨM</li>
+                <li class="parameter-product" onclick="changActiveDetails('content-parameter',this)">THÔNG SỐ KĨ THUẬT</li>
+                <li class="comment-product" onclick="changActiveDetails('content-comment',this)">BÌNH LUẬN</li>
+            </ul>
+        </div>
+        <div class="content-detail">
+            <div id="content-information">
+                <p class="text-infomation">
+                    @Html.Raw(Model.Desscription)
+                </p>
+            </div>
+            <div id="content-parameter">
+                <div class="name-table-product">GIANT MOMENTUM - INEED ESPRESSO</div>
+                <table class="parameter-product">
+                    <tr>
+                        <th>KHUNG XE</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Khun sườn</td>
+                        <td>Giant 700c ALUXX</td>
+                    </tr>
+                    <tr>
+                        <td>Phuộc</td>
+                        <td>Hợp kim nhôm</td>
+                    </tr>
+                    <tr>
+                        <td>Khoá cốt yên</td>
+                        <td>Hợp kim nhôm, lục giác</td>
+                    </tr>
+                    <tr>
+                        <th>PHỤ TÙNG</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Chén cổ</td>
+                        <td>Bạc đạn</td>
+                    </tr>
+                    <tr>
+                        <td>Vòng chêm cổ</td>
+                        <td>Hợp kim nhôm</td>
+                    </tr>
+                    <tr>
+                        <td>Ghi đông / Tay lái</td>
+                        <td>Giant 31.8mm, hợp kim nhôm</td>
+                    </tr>
+                    <tr>
+                        <td>Yên</td>
+                        <td>Gian Sport</td>
+                    </tr>
+                    <tr>
+                        <td>Bàn đạp</td>
+                        <td>Cốt bi</td>
+                    </tr>
+                    <tr>
+                        <td>Tay nắm / Bao tay</td>
+                        <td>Dây quấn</td>
+                    </tr>
+                    <tr>
+                        <th>BỘ TRUYỀN ĐỘNG</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Trụn giữa / Cốt giữa</td>
+                        <td>Bạc đạn</td>
+                    </tr>
+                    <tr>
+                        <td>Giò dĩa, Đùi dĩa</td>
+                        <td>Hợp kim nhôm 34-50T</td>
+                    </tr>
+                    <tr>
+                        <td>Líp / Nhông</td>
+                        <td>Shimano HG50 11-25T (8Speed)</td>
+                    </tr>
+                    <tr>
+                        <td>Sên / Xích</td>
+                        <td>KMC X8</td>
+                    </tr>
+                    <tr>
+                        <td>Tay lắc / Tay đề</td>
+                        <td>Shimano Claris 2000</td>
+                    </tr>
+                    <tr>
+                        <td>Cùi dĩa / Sang dĩa</td>
+                        <td>Shimano Claris 2000</td>
+                    </tr>
+                    <tr>
+                        <td>Cùi líp / Sang líp</td>
+                        <td>Shimano Claris 2000</td>
+                    </tr>
+                    <tr>
+                        <td>Tay Thắng</td>
+                        <td>Shimano Claris 2000</td>
+                    </tr>
+                    <tr>
+                        <th>LƯU Ý !</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 1px solid var(--border-color);">***</td>
+                        <td style="border-bottom: 1px solid var(--border-color);">Các chi tiết sản phẩm có thể thay đổi mà không cần báo trước</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="content-comment">
+                <div class="header-comment">
+                    <div><b>1 bình luận</b></div>
+                    <div class="arrange-comment">
+                        <label for="arange">Sắp xếp theo:</label>
+                        <select id="arange" class="box-arange">
+                            <option value="oldest" class="item-arrange">Mới nhất</option>
+                            <option value="newest" class="item-arrange">Cũ nhất</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cmt-product">
+                    <h3 class="name-commenter">Đặng Thu Thuỷ</h3><div class="date-cmt">2022/10/30</div>
+                    <div class="customer-cmt">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi voluptate delectus, repellendus fuga placeat quibusdam in explicabo non expedita reiciendis vero aspernatur consequatur eveniet praesentium reprehenderit? Quasi officiis ipsum atque?</p>
+                        <div class="img-cmt">
+                            <img src="/imgs/product-sale4.png" alt="">
+                        </div>
+                        <div class="like-cmt">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                            <i class="fa-solid fa-thumbs-down"></i>
+                        </div>
+                        <a class="feedback-cmt" href="">Phản hồi</a>
+                    </div>
+                </div>
+                @using(Html.BeginForm("Detail?id=" + Model.ProID, "Home", FormMethod.Post))
+                { 
+                    <div class="input-cmt">
+
+                        <div class="img-user">
+                            <img src="/imgs/user-cmt.png" alt="">
+                        </div>
+                        <input type="text" class="input-comment" placeholder="Viết bình luận">
+                        @*@Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, id = "txtContent" })*@
+                        <button class="sm-cmt" type="submit">Đăng</button>
+                    </div>
+                }
+                <div class="link-plugin">
+                    <i class="fa-brands fa-facebook-square"></i>
+                    <a href="https://www.facebook.com/profile.php?id=100045393554281" target="_blank">Plugin bình luận trên Facebook</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script src="/Scripts/MenuOnTop.js"></script>
+    <script src="/Scripts/Sản phẩm.js"></script>
+    <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/jquery-3.6.1.min.js"></script>
+    <script>
+        var myApp = angular.module("myApp", ["ngCkeditor"]);
+        myApp.directive('ckEditor', function () {
+            return {
+                require: '?ngModel',
+                link: function (scope, elm, attr, ngModel) {
+                    var ck = CKEDITOR.replace(elm[0]);
+                    if (!ngModel) return;
+                    ck.on('instanceReady', function () {
+                        ck.setData(ngModel.$viewValue);
+                    });
+                    function updateModel() {
+                        scope.$apply(function () {
+                            ngModel.$setViewValue(ck.getData());
+                        });
+                    }
+                    ck.on('change', updateModel);
+                    ck.on('key', updateModel);
+                    ck.on('dataReady', updateModel);
+
+                    ngModel.$render = function (value) {
+                        ck.setData(ngModel.$viewValue);
+                    };
+                }
+            };
+        });
+        myApp.controller("myctrl", function ($scope) {
+            $scope.viewdata = function () {
+                alert($scope.data);
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#btnSelectImage').on('click', function (e) {
+                e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    $('#txtImage').val(url)
+                }
+                finder.popup();
+            })
+        })
+
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/Assets/plugins/ckeditor/config.js'
+        })
+    </script>
+}

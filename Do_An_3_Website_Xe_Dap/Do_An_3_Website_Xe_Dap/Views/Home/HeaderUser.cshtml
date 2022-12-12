@@ -1,0 +1,23 @@
+﻿@model DataShop.EF.Customer
+
+@if (Session["USER_SESSIONCUS"] == null)
+{
+    <a href="DangNhap">
+        <a href="../Home/DangNhap" class="drop-down">
+            <span class="user-item">Tài khoản</span>
+            <span class="border-separate"></span>
+        </a>
+    </a>
+}
+
+else
+{
+    <a href="#" class="drop-down">
+        <span class="user-item">
+            @Model.CusName
+                @*<a style="color: #fff" href="DangNhap"><i class="fa-solid fa-right-from-bracket"></i></a>*@
+            @Html.ActionLink(" ", "DangXuat", "Home", new {@class= "fa-solid fa-right-from-bracket" })
+            </span>
+        <span class="border-separate"></span>
+    </a>
+}

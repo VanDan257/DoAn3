@@ -1,0 +1,101 @@
+﻿@model IEnumerable<DataShop.EF.News>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int tt = 1;
+}
+
+@section header{
+    Danh sách Tin tức
+}
+
+<button class="btn btn-primary" style="margin-bottom: 12px;">
+    <i class="fa-solid fa-plus"></i>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "text-gray-100" })
+</button>
+
+<div class="container-fluid" ng-controller="mycontrol">
+
+    <table class="table table-bordered table-striped" id="dataTable">
+        <thead>
+            <tr>
+                <th>TT</th>
+                <th>
+                    Hình ảnh
+                </th>
+                <th>
+                    Tiêu đề
+                </th>
+                <th>
+                    Tên nhân viên
+                </th>
+                <th>
+                    Ngày tạo
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@(tt++)</td>
+                    <td>
+                        @*<img src=" {{data.Image}}" style="width: 150px;" />*@
+                        @if (item.Image != null)
+                        {
+                            <img src="@item.Image" style="width: 150px;" />
+                        }
+                        else
+                        {
+                            <img src="/FileUpLoad/images/th.jpg" style="width: 150px;" />
+                        }
+                    </td>
+                    <td>
+                        @*{{data.Title}}*@
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @*{{data.User.UserName}}*@
+                        @Html.DisplayFor(modelItem => item.User.FullName)
+                    </td>
+                    <td>
+                        @*{{data.PublicDate}}*@
+                        @Html.FormatValue(item.PublicDate, "{0:dd-MM-yyyy}")
+                    </td>
+                    <td>
+                        @*<a href="/Admin/News/Edit?id={{data.NewsID}}"><i class="text-warning fa-solid fa-pen-to-square"></i></a>
+                            <a href="/Admin/News/Details?id={{data.NewsID}}"><i class="fa-solid fa-circle-info"></i></a>
+                            <a href="/Admin/News/Delete?id={{data.NewsID}}"><i class="text-danger fa-solid fa-trash"></i></a>*@
+
+                        @Html.ActionLink(" ", "Edit", new { id = item.NewsID }, new { @class = "text-warning fa-solid fa-pen-to-square" }) |
+                        @Html.ActionLink(" ", "Details", new { id = item.NewsID }, new { @class = " fa-solid fa-circle-info" }) |
+                        @Html.ActionLink(" ", "Delete", new { id = item.NewsID }, new { @class = "text-danger fa-solid fa-trash" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
+@section scripts {
+    <script src="/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/Assets/Admin/js/demo/datatables-demo.js"></script>
+    <script>
+        var myApp = angular.module("XeDap", []);
+        myApp.controller("mycontrol", mycontrol);
+        function mycontrol($scope, $http) {
+            $http({
+                url: "/Admin/News/GetAll",
+                method: "GET"
+            }).then(function (res) {
+                $scope.datas = res.data;
+            });
+        }
+    </script>
+}

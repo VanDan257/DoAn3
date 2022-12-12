@@ -1,0 +1,151 @@
+﻿@model IEnumerable<DataShop.EF.Product>
+
+@{
+    ViewBag.Title = "DanhMucSanPham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<DataShop.EF.Provider> dsncc = ViewBag.listNCC;
+}
+
+@section css{
+    <link rel="stylesheet" href="@Url.Content("~/Content/Danh mục sản phẩm.css?v=3.4.2")" />
+}
+
+@*@Html.Partial("_navbar")*@
+
+<div id="main" class="grid" ng-app="myApp">
+    <div class="container-bath">
+        <div class="bath">
+            <span class="bath1"><a href="TrangChu">Trang chủ</a></span>
+            <span class="gach-xuoc">/</span>
+            <span class="bath2"><a href="DanhMucSanPham">Danh mục</a></span>
+            <span class="gach-xuoc">/</span>
+            <span class="this-index">XE ĐẠP</span>
+        </div>
+    </div>
+    <div class="container-filter-product">
+        <div class="filter-product">
+            <div class="header-filter-product">
+                <h3 class="text-header-filter">LỌC SẢN PHẨM</h3>
+            </div>
+            <div class="list-name-product">
+                <h4 class="text-producer">NHÀ SẢN XUẤT</h4>
+                <ul class="list-producer">
+                    @foreach (var item in dsncc)
+                    {
+
+                        <li class="name-producer">
+                            <a href="" class="product-of-producer">
+                                <input type="checkbox" id="producer-@item.PrvID">
+                                <label for="producer-@item.PrvID" class="item-producer">@item.PrvName</label>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <hr style="width: 80%;margin-left: 22px;opacity: 0.4;">
+                <h4 class="text-producer">GIÁ</h4>
+                <ul class="list-producer filter-price">
+                    <li class="name-producer">
+                        <a href="" class="product-of-producer">
+                            <input type="radio" name="about-price" id="over500k">
+                            <label for="over500k" class="item-producer">< 500.000₫</label>
+                        </a>
+                    </li>
+                    <li class="name-producer">
+                        <a href="" class="product-of-producer">
+                            <input type="radio" name="about-price" id="less500k">
+                            <label for="less500k" class="item-producer">500.000₫ - 1.000.000₫</label>
+                        </a>
+                    </li>
+                    <li class="name-producer">
+                        <a href="" class="product-of-producer">
+                            <input type="radio" name="about-price" id="over1m">
+                            <label for="over1m" class="item-producer">1.000.000₫ - 3.000.000₫</label>
+                        </a>
+                    </li>
+                    <li class="name-producer">
+                        <a href="" class="product-of-producer">
+                            <input type="radio" name="about-price" id="over3m">
+                            <label for="over3m" class="item-producer">3.000.000₫ - 5.000.000₫</label>
+                        </a>
+                    </li>
+                    <li class="name-producer">
+                        <a href="" class="product-of-producer">
+                            <input type="radio" name="about-price" id="over5m">
+                            <label for="over5m" class="item-producer">> 5.000.000₫</label>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-products" ng-controller="mycontrol">
+        <div class="box-products" id="xe-dap">
+            <div class="box-content">
+                <div class="header-category-products">
+                    <h4 class="title-category-products">XE ĐẠP</h4>
+                    <div class="arrange-list-products">
+                        <p class="text-arrange-list-products">Sắp xếp theo:</p>
+                        <select name="select-arrange" id="select-arrange-list-products" ng-model="sortColumn">
+                            <option value="">Sản phẩm nổi bật</option>
+                            <option value="Price">Giá tăng dần</option>
+                            <option value="-Price">Giá giảm dần</option>
+                            <option value="Title">Tên: A-Z</option>
+                            <option value="-Title">Tên: Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="box-list-products">
+
+                    <div class="products" ng-repeat="data in datas | orderBy:sortColumn track by $index">
+                        <div class="container-img-product">
+                            <a href="Detail?id={{data.ProID}}">
+                                <span class="search-btn"><i class="search-btn-item fa-solid fa-magnifying-glass-plus"></i></span>
+                                <img src="{{data.Image}}" alt="" class="item-product">
+                            </a>
+                            <div class="intro-product-item-hover">
+                                <button><i class="hover-product fa-solid fa-scale-balanced"></i></button>
+                                <button>
+                                    <a href="../Home/themgh?id={{data.ProID}}" class="hover-product fa-solid fa-cart-plus"></a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="name-product">{{data.Title}}</div>
+                        <div class="feedback">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half"></i>
+                        </div>
+                        <div class="price">{{data.Price | currency:""}} đ</div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script src="/Scripts/angular.js"></script>
+    @Scripts.Render("/Scripts/MenuOnTop.js")
+    @Scripts.Render("/Scripts/TimKiem.js")
+    <script>
+        var myApp = angular.module("myApp", []);
+        myApp.controller("mycontrol", mycontrol);
+        function mycontrol($scope, $http) {
+            $http({
+                url: "/Home/GetProduct",
+                method: "GET"
+            }).then(function (res) {
+                $scope.datas = res.data;
+            });
+            $scope.sortColumn = 'name';
+        }
+    </script>
+}
+
+
+

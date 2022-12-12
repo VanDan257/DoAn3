@@ -1,0 +1,228 @@
+﻿@model DataShop.EF.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Chỉnh sửa Sản phẩm @Model.Title
+}
+
+@using (Html.BeginForm(new { @enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal" ng-controller="Product">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @*<label class="control-label col-md-2">Mã sản phẩm</label>*@
+
+            <div class="col-md-10">
+
+                <input id="id" hidden value="@Model.ProID" type="text" class="form-control" placeholder="Ma" aria-label="Username" aria-describedby="basic-addon1">
+                @Html.ValidationMessageFor(model => model.ProID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Tiêu đề</label>
+            @*@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <input type="text" ng-model="product.Title" class="form-control" />
+                @*@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Danh mục</label>
+            @*@Html.LabelFor(model => model.CateID, "CateID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <select ng-model="product.CateID">
+                    <option ng-repeat="x in tendm" ng-selected="product.CateID == x.CateID" ng-value="{{x.CateID}}">
+                        {{x.CateName}}
+                    </option>
+                </select>
+                @*@Html.DropDownList("CateID", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.CateID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Màu sắc</label>
+            @*@Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <input ng-model="product.Color" class="form-control" type="text" />
+                @*@Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mô tả</label>
+            @*@Html.LabelFor(model => model.Desscription, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <textarea ng-model="product.Desscription" id="txtContent" data-ck-editor></textarea>
+                @*@Html.TextAreaFor(model => model.Desscription, new { htmlAttributes = new { @class = "form-control" }, id = "txtContent" })*@
+                @Html.ValidationMessageFor(model => model.Desscription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Hình ảnh</label>
+            @*@Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <input type="text" ng-model="product.Image" id="txtImage" />
+                @*@Html.TextBoxFor(model => model.Image, new { htmlAttribute = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })*@
+                <a style="cursor: pointer;" ng-click="ChooseImage()" id="btnSelectImage">Chọn ảnh</a>
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Giá</label>
+            @*@Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <input ng-model="product.Price" class="form-control" type="text" />
+                @*@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Giá khuyến mãi</label>
+            @*@Html.LabelFor(model => model.PromotionPrice, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <input ng-model="product.PromotionPrice" class="form-control" type="text" />
+                @*@Html.EditorFor(model => model.PromotionPrice, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.PromotionPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Số lượng</label>
+            @*@Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <input ng-model="product.Quantity" class="form-control" type="text" />
+                @*@Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button ng-click="Edit()" class="btn fa fa-save" type="submit">
+                    Save
+                </button>
+                @Html.ActionLink("Exit", "Index", null, new { @class = "btn fa fa-close" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script src="http://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-ckeditor/0.2.1/ng-ckeditor.min.js"></script>
+    <script>
+        var myApp = angular.module("XeDap", ["ngCkeditor"]);
+        myApp.directive('ckEditor', function () {
+            return {
+                require: '?ngModel',
+                link: function (scope, elm, attr, ngModel) {
+                    var ck = CKEDITOR.replace(elm[0]);
+                    if (!ngModel) return;
+                    ck.on('instanceReady', function () {
+                        ck.setData(ngModel.$viewValue);
+                    });
+                    function updateModel() {
+                        scope.$apply(function () {
+                            ngModel.$setViewValue(ck.getData());
+                        });
+                    }
+                    ck.on('change', updateModel);
+                    ck.on('key', updateModel);
+                    ck.on('dataReady', updateModel);
+
+                    ngModel.$render = function (value) {
+                        ck.setData(ngModel.$viewValue);
+                    };
+                }
+            };
+        });
+        myApp.controller("Product", function ($scope) {
+            $scope.viewdata = function () {
+                alert($scope.data);
+            }
+        });
+    </script>
+
+    <script>
+        //$(document).ready(function () {
+        //    $('#btnSelectImage').on('click', function (e) {
+        //        e.preventDefault();
+        //        var finder = new CKFinder();
+        //        finder.selectActionFunction = function (url) {
+        //            $('#txtImage').val(url)
+        //        }
+        //        finder.popup();
+        //    })
+        //})
+
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/Assets/plugins/ckeditor/config.js'
+        })
+    </script>
+    <script>
+        var app = angular.module('XeDap', []);
+
+        app.controller('Product', function ($scope, $http, $window) {
+            $scope.provider = {}
+
+            var config = {
+                params: {
+                    id: $("#id").val(),
+                }
+            };
+
+            $http.get("/Admin/Products/GetTenDM").then(function (result) {
+                $scope.tendm = result.data;
+                console.log($scope.tendm)
+            }, function (error) {
+                alert("Loi lay ten danh muc")
+            });
+
+            $http.get("/Admin/Products/GetByID", config).then(function (result) {
+                $scope.product = result.data;
+                console.log($scope.product)
+            }, function (error) {
+                alert("Không tìm thấy sản phẩm")
+            });
+
+            $scope.ChooseImage = ChooseImage;
+            function ChooseImage() {
+
+                //$('#btnSelectImage').on('click', function (e) {
+                //e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    //var ImagePath = url
+                    $scope.product.Image = url
+                }
+                finder.popup();
+                //})
+            }
+
+            $scope.Edit = Edit;
+            function Edit() {
+                $http.post("/Products/Edit", $scope.product).then(function (result) {
+                    $window.location.href = '/Admin/Products/Index';
+                }, function (error) {
+                    console.log($scope.product)
+                    alert("Sửa thất bại")
+                });
+            }
+
+        });
+    </script>
+}

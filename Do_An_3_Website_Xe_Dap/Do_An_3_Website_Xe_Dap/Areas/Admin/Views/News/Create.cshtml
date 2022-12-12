@@ -1,0 +1,172 @@
+﻿@model DataShop.EF.News
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Tạo tin mới
+}
+
+<form>
+
+    <div class="form-horizontal" ng-controller="News">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Tiêu đề</label>
+            @*@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <input type="text" ng-model="news.Title" class="form-control" />
+                @*@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên nhân viên</label>
+            @*@Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <select ng-model="news.UserID">
+                    <option ng-repeat="x in tennv" ng-selected="news.UserID == x.UserID" ng-value="{{x.UserID}}">
+                        {{x.FullName}}
+                    </option>
+                </select>
+                @*@Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.PublicDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PublicDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PublicDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nội dung</label>
+            @*@Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <textarea ng-model="news.Content" class="form-control" id="txtContent"></textarea>
+                @*@Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, id = "txtContent" })*@
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Hình ảnh</label>
+            @*@Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @*<input type="file" id="file1" name="file1" />*@
+                <input type="text" name="Image" ng-model="news.Image" id="txtImage" />
+                @*@Html.TextBoxFor(model => model.Image, new { htmlAttribute = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })*@
+                <a style="cursor: pointer;" ng-click="ChooseImage()" id="btnSelectImage">Chọn ảnh</a>
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" ng-click="Create()" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts
+{
+    <script src="http://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-ckeditor/0.2.1/ng-ckeditor.min.js"></script>
+    <script>
+        var myApp = angular.module("myApp", ["ngCkeditor"]);
+        myApp.directive('ckEditor', function () {
+            return {
+                require: '?ngModel',
+                link: function (scope, elm, attr, ngModel) {
+                    var ck = CKEDITOR.replace(elm[0]);
+                    if (!ngModel) return;
+                    ck.on('instanceReady', function () {
+                        ck.setData(ngModel.$viewValue);
+                    });
+                    function updateModel() {
+                        scope.$apply(function () {
+                            ngModel.$setViewValue(ck.getData());
+                        });
+                    }
+                    ck.on('change', updateModel);
+                    ck.on('key', updateModel);
+                    ck.on('dataReady', updateModel);
+
+                    ngModel.$render = function (value) {
+                        ck.setData(ngModel.$viewValue);
+                    };
+                }
+            };
+        });
+        myApp.controller("myctrl", function ($scope) {
+            $scope.viewdata = function () {
+                alert($scope.data);
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            
+        })
+
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/Assets/plugins/ckeditor/config.js'
+        })
+    </script>
+
+    <script>
+
+        var app = angular.module('XeDap', []);
+        app.controller('News', function ($scope, $http, $window) {
+            $scope.news = {};
+
+            $http.get("/Admin/News/GetNV").then(function (result) {
+                $scope.tennv = result.data;
+                console.log($scope.tennv)
+            }, function (error) {
+                alert("Loi lay ten nhan vien")
+            });
+
+            // Choose Image Product
+            //$scope.statusChooseAvatar = false;
+            $scope.ChooseImage = ChooseImage;
+            function ChooseImage() {
+
+                $('#btnSelectImage').on('click', function (e) {
+                    e.preventDefault();
+                    var finder = new CKFinder();
+                    finder.selectActionFunction = function (url) {
+                        $scope.news.Image=url
+                    }
+                    finder.popup();
+                })
+            }
+
+            $scope.Create = Create;
+            function Create() {
+                $scope.news.Content = CKEDITOR.instances['txtContent'].getData();
+                console.log($scope.news);
+                $http.post("/Admin/News/Create", $scope.news).then(function (result) {
+                    $window.location.href = '/Admin/News/Index';
+                }, function (error) {
+                    alert("Thêm không thành công")
+                })
+            }
+
+        });
+    </script>
+
+
+}

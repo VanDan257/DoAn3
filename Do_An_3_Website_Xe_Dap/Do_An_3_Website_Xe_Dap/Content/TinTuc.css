@@ -1,0 +1,130 @@
+.pathWeb{
+    margin: 4px 20px 12px;
+    display: inline;
+}
+
+.pathWeb span{
+    font-size: 1rem;
+    color: rgb(79, 108, 80);
+    margin: 2px;
+}
+
+.pathWeb .icon-bath{
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.containerNews{
+    display:flex;
+    margin-bottom: 12px;
+}
+
+.header-Content_News {
+    display: inline-block;
+}
+
+.header-Content_News div{
+    font-size: 2rem;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+ul.listTitle__newsCate {
+    padding-left: 0;
+}
+
+.newsVertical{
+    width: 20%;
+    min-width: 180px;
+    border: 1px solid #a4a4a4;
+    margin-right: 12px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 211px;
+}
+
+.header__newsCate{
+    background-color: #4a4a4a;
+    color: #ffffff;
+    height: 35px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.header__newsCate div{
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.listTitle__newsCate{
+    margin: 0 6px;
+}
+
+.item-listTitle__newsCate{
+    padding: 5px 14px;
+    list-style-type: none;
+    border-bottom: 1px solid #4a4a4a;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.item-listTitle__newsCate:last-child{
+    border-bottom: none;
+}
+
+.item-listTitle__newsCate:hover{
+    color: rgb(26, 136, 46)
+}
+
+
+
+.news{
+    border: 1px solid var(--border-color);
+    display: flex;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.news img{
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.content{
+    margin: 12px;
+}
+
+.dmNews{
+    color:rgb(5, 108, 219);
+    cursor: pointer;
+    transition: 0.2s
+}
+
+.dmNews:hover{
+    color: var(--primary-color);
+}
+
+.title-news{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.descriptionNews{
+    font-size: 0.9rem;
+    color: #535353;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dateNews{
+    font-size: 0.8rem;
+    color: rgb(136, 136, 136);
+    margin-top: 8px;
+}

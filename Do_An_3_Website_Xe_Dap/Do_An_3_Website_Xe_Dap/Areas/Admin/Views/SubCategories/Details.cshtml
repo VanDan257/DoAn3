@@ -1,0 +1,37 @@
+﻿@model DataShop.EF.SubCategory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Chi tiết danh mục con @Model.SubCateName
+}
+
+<div>
+    <h4>SubCategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubCateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CateName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SubCateID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

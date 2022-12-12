@@ -1,0 +1,65 @@
+﻿@model DataShop.EF.Category
+
+@{
+    ViewBag.Title = "Chi tiết Danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Chi tiết Danh mục @Model.CateName
+}
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên danh mục
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CateName)
+        </dd>
+
+    </dl>
+    <h3>Danh sách Danh mục con</h3>
+    <table class="table table-bordered table-striped" id="dataTable">
+        <thead>
+            <tr>
+                <th>
+                    Tên danh mục con
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.SubCategories)
+            {
+                <tr>
+                    <td>
+                        @item.SubCateName
+
+                    </td>
+                    <td>
+                        <a href="/Admin/Subcategories/Edit?id=@item.SubCateID"><i class="text-warning fa-solid fa-pen-to-square"></i></a>
+                        <a href="/Admin/Subcategories/Details?id=@item.SubCateID"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="/Admin/Subcategories/Delete?id=@item.SubCateID"><i class="text-danger fa-solid fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/Admin/Subcategories/Create">Tạo danh mục con</a>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CateID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section scripts{
+    <script src="/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Assets/Admin/js/demo/datatables-demo.js"></script>
+    
+}
